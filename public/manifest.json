@@ -3,7 +3,7 @@
 
   "name": "Hawaii OpenData",
   "description": "HACC 2024",
-  "version": "0.0.2",
+  "version": "0.0.3",
 
   "options_ui": {
     "page": "options.html"
@@ -17,7 +17,7 @@
   "content_scripts": [
       {
           "matches": ["https://opendata.hawaii.gov/*"],
-          "js": ["js/content_script.js"],
+          "js": ["js/vendor.js", "js/content_script.js"],
           "world" : "MAIN"
       }
   ],

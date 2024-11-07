@@ -1,6 +1,6 @@
 {
   "name": "opendata-crx",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Hawaii Opendata Extension",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,7 @@
     "url": "https://github.com/bestrada/opendata-crx"
   },
   "dependencies": {
+    "posthog-js": "^1.181.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
