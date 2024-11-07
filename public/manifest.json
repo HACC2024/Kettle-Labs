@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
 
-  "name": "Chrome Extension TypeScript Starter",
-  "description": "Chrome Extension, TypeScript, Visual Studio Code",
-  "version": "1.0",
+  "name": "Hawaii OpenData",
+  "description": "HACC 2024",
+  "version": "0.0.2",
 
   "options_ui": {
     "page": "options.html"
@@ -16,8 +16,9 @@
 
   "content_scripts": [
       {
-          "matches": ["<all_urls>"],
-          "js": ["js/vendor.js", "js/content_script.js"]
+          "matches": ["https://opendata.hawaii.gov/*"],
+          "js": ["js/content_script.js"],
+          "world" : "MAIN"
       }
   ],
 
@@ -30,6 +31,14 @@
   ],
 
   "host_permissions": [
-    "<all_urls>"
-  ]
+    "*://opendata.hawaii.gov/*",
+    "*://opendata-portal.vercel.app/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://opendata.hawaii.gov/*",
+      "https://opendata-portal.vercel.app/*"
+    ],
+    "accepts_tls_channel_id": true
+  }
 }
