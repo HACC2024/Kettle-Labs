@@ -28,6 +28,12 @@ module.exports = {
                 use: "ts-loader",
                 exclude: /node_modules/,
             },
+            {
+                test: /\.css$/i,
+                include: /node_modules/,
+                exclude: path.resolve(__dirname, 'public'),
+                use: ["style-loader", "css-loader"],
+            }
         ],
     },
     resolve: {
