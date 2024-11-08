@@ -1,6 +1,6 @@
 {
   "name": "opendata-crx",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Hawaii Opendata Extension",
   "main": "index.js",
   "scripts": {
