@@ -1,5 +1,5 @@
 # Hawaii OpenData HACC
-
+![build](https://github.com/HACC2024/Kettle-Labs/workflows/build/badge.svg)
 Chrome extension to augment `opendata.hawaii.gov`
 
 ## Prerequisites
