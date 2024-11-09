@@ -86,6 +86,7 @@ export const App = (props:AppProps) => {
             value={query}
             language="sql"
             placeholder="Write some SQL..."
+            data-color-mode="light"
             padding={8}
             onChange={(ev) => setQuery(ev.target.value)}
           />
@@ -96,6 +97,7 @@ export const App = (props:AppProps) => {
             language="json"
             placeholder="Results will be shown here..."
             padding={8}
+            data-color-mode="light"
             contentEditable={false}
           />
       </div>
