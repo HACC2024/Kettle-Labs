@@ -1,14 +1,22 @@
-#hacc-root {
+#hacc-root .app {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background-color: #f0fdf4;
   padding: 16px;
   margin: 16px 0 32px 0;
   border-radius: 8px;
+  background-color: #e2e8f0;
 }
 
-#hacc-root .grid-container {
+#hacc-root .app.app-success {
+  background-color: #f0fdf4;
+}
+
+#hacc-root .app.app-fail{
+  background-color: #fee2e2;
+}
+
+#hacc-root .app .grid-container {
   display:grid;
   grid-auto-flow: column;
   column-gap: 8px;
@@ -17,7 +25,7 @@
   margin-bottom:8px;
 }
 
-#hacc-root .grid-container .grid-item {
+#hacc-root .app .grid-container .grid-item {
   background-color: #f6f8fa;
   font-family: ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace;
   min-height: 256px;
@@ -25,27 +33,27 @@
   overflow-y:scroll;
 }
 
-#hacc-root .query-actions {
+#hacc-root .app .query-actions {
   display:flex;
   gap: 8px;
 }
 
 /** style the result table */
-#hacc-root .result-table {
+#hacc-root .app .result-table {
   /* Allows horizontal scrolling if content exceeds container width */
   overflow-x: auto;
 
   overflow-y:scroll;
   max-height:480px;
 }
-#hacc-root .result-table table {
+#hacc-root .app .result-table table {
   width: auto; 
   table-layout: auto;
   white-space: nowrap;
   border-collapse: collapse;
 }
 
-#hacc-root .result-table table thead th { 
+#hacc-root .app .result-table table thead th { 
   position: sticky;
   top:0;
   background-color: #f5f5f5;

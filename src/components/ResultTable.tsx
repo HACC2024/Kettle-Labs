@@ -2,7 +2,7 @@ import React from "react";
 import { SQLResult } from "../types/api";
 
 type ResultTableProps = {
-  success: boolean;
+  success: boolean|null;
   result: SQLResult;
 }
 

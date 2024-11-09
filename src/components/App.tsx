@@ -42,7 +42,7 @@ export const App = (props:AppProps) => {
 
   const [query, setQuery] = useState(sampleQuery);
   const [result, setResult] = useState(null as SQLResult|null);
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState(null as boolean|null);
   const [loading, setLoading] = useState(false);
 
   function runQuery() {
@@ -51,8 +51,8 @@ export const App = (props:AppProps) => {
     fetch(`/api/3/action/datastore_search_sql?sql=${encodeURIComponent(minifySQL(query))}`)
       .then(async response => {
         const data = await response.json();
-        setSuccess(data.success || data.error);
-        setResult(data.result);
+        setResult(data.result || data.error || data);
+        setSuccess(response.ok);
       })
       .catch(err => {
         console.error(err);
@@ -74,12 +74,12 @@ export const App = (props:AppProps) => {
     chrome.storage.sync.remove([props.resourceId]).finally(() => {
       setQuery(sampleQuery);
       setResult(null);
-      setSuccess(false);
+      setSuccess(null);
       setLoading(false);
     });
   }
 
-  return <>
+  return <div className={`app app-${success ? 'success' : null === success ? 'default' : 'fail'}`}>
     <div className="grid-container">
       <div className="grid-item">
         <CodeEditor
@@ -88,7 +88,7 @@ export const App = (props:AppProps) => {
             placeholder="Write some SQL..."
             data-color-mode="light"
             padding={8}
-            onChange={(ev) => setQuery(ev.target.value)}
+            onChange={(ev) => { setQuery(ev.target.value); setSuccess(null);} }
           />
         </div>
       <div className="grid-item">
@@ -120,5 +120,5 @@ export const App = (props:AppProps) => {
 
     
     { success && result && <ResultTable success={success} result={result} /> }
-    </>;
+    </div>;
 }
