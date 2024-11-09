@@ -38,8 +38,7 @@
   "permissions": [
     "storage",
     "webRequest",
-    "webNavigation",
-    "tabs"
+    "webNavigation"
   ],
 
   "host_permissions": [
