@@ -56,3 +56,12 @@ else if (2 === tokens.length && tokens[0] === 'dataset') {
     });
   });
 }
+
+// since this script is running in the MAIN world/context
+// i can opportunistically delete elements from the resource
+// preview pane that I know I will never use.
+const GUID_REGEX = /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$/;
+if (4 === tokens.length && 'dataset' === tokens[0] && 'resource' === tokens[2] && GUID_REGEX.test(tokens[3])) {
+  document.querySelector('#content section.module.module-resource .module-content ul.nav.nav-tabs')?.remove();
+  document.querySelector('#content section.module.module-resource .module-content div.resource-view')?.remove();
+}
