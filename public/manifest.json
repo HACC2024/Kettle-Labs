@@ -3,7 +3,7 @@
 
   "name": "Hawaii OpenData HACC",
   "description": "Write SQL queries in Hawai'i's OpenData Portal",
-  "version": "0.1.2",
+  "version": "0.1.4",
 
   "options_ui": {
     "page": "options.html"
@@ -21,12 +21,19 @@
           "matches": ["https://opendata.hawaii.gov/*"],
           "js": ["js/vendor.js", "js/content_script.js"],
           "css" : ["style/content.css"]
-      }
+      },
+      {
+        "matches": ["https://opendata.hawaii.gov/*"],
+        "js": ["js/tracker.js"],
+        "world" : "MAIN",
+        "run_at": "document_idle"
+    }
   ],
 
   "background": {
     "service_worker": "js/background.js"
   },
+
 
   "permissions": [
     "storage",
