@@ -1,16 +1,5 @@
 import React from "react";
-
-export type SQLResult = {
-  sql: string; // The SQL query that was run
-  records: {
-    [key: string]: any;
-  }[];
-
-  fields : {
-    id : string;   // the name of the attribute in the record
-    type : string; // the postgres type of the attribute
-  }[]
-}
+import { SQLResult } from "../types/api";
 
 type ResultTableProps = {
   success: boolean;
@@ -25,7 +14,7 @@ export const ResultTable = (props:ResultTableProps) => {
 
   // get all column names, omit the "_full_text" column
   const columns = props.result.fields.map(field => field.id).filter(id => id !== '_full_text');
-  return <div className="dataTables_scroll">
+  return <div className="dataTables_scroll result-table">
     <div className="dataTables_scrollBody">
       <table className="table table-striped table-bordered dataTable no-footer">
         <thead>

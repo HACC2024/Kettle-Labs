@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CodeEditor from '@uiw/react-textarea-code-editor';
-import { ResultTable, type SQLResult } from "./components/ResultTable";
+import { ResultTable } from "./ResultTable";
+import { SQLResult } from "../types/api";
 
 type AppProps = {
   resourceId: string;
@@ -18,11 +19,25 @@ function minifySQL(sql: string): string {
 }
 
 export const App = (props:AppProps) => {
-  const sampleQuery = `
+  let sampleQuery = `
   SELECT *
   FROM "${props.resourceId}"
   LIMIT 10
   `.replace(/^\s+|\s+$/g, '');
+
+  useEffect(function componentDidMount() {
+    chrome.storage.sync.get([props.resourceId])
+      .then(function(result) {
+        if (result[props.resourceId]) {
+          sampleQuery = result[props.resourceId];
+          setQuery(sampleQuery);
+        }
+      })
+      .catch(function(err) {
+        // ignore error, just set the default sample query prevail
+        console.error(err);
+      });
+  }, [props.resourceId]);
 
   const [query, setQuery] = useState(sampleQuery);
   const [result, setResult] = useState(null as SQLResult|null);
@@ -30,23 +45,36 @@ export const App = (props:AppProps) => {
   const [loading, setLoading] = useState(false);
 
   function runQuery() {
+    setLoading(true);
     fetch(`/api/3/action/datastore_search_sql?sql=${encodeURIComponent(minifySQL(query))}`)
       .then(async response => {
         const data = await response.json();
-        setSuccess(data.success);
+        setSuccess(data.success || data.error);
         setResult(data.result);
       })
       .catch(err => {
         console.error(err);
         setResult(err as any);
         setSuccess(false);
-      });
+      })
+      .finally(() => setLoading(false));
+  }
+
+  function saveQuery() {
+    setLoading(true);
+    chrome.storage.sync.set({[props.resourceId]: query}, function() {
+      setLoading(false);
+    });
   }
 
   function reset() {
-    setQuery(sampleQuery);
-    setResult(null);
-    setSuccess(false);
+    setLoading(true);
+    chrome.storage.sync.remove([props.resourceId]).finally(() => {
+      setQuery(sampleQuery);
+      setResult(null);
+      setSuccess(false);
+      setLoading(false);
+    });
   }
 
   return <>
@@ -73,9 +101,18 @@ export const App = (props:AppProps) => {
     </div>
     
     <div className="query-actions">
-      <a className="btn btn-primary" href="#" onClick={runQuery}>Submit Query</a>
-      <a className="btn btn-default" href="#">Save</a>
-      <a className="btn btn-danger" href="#" onClick={reset}>Reset</a>
+      <a className={`btn btn-primary ${loading ? 'disabled' : ''}`} href="#" onClick={runQuery}>
+        <i className="fa fa-lg fa-play-circle"></i>
+        Submit Query
+      </a>
+      <a className={`btn btn-default ${loading ? 'disabled' : ''}`} href="#" onClick={saveQuery}>
+      <i className="fa fa-lg fa-save"></i>
+        Save Query
+      </a>
+      <a className={`btn btn-danger ${loading ? 'disabled' : ''}`} href="#" onClick={reset}>
+        <i className="fa fa-lg fa-undo"></i>
+        Reset
+      </a>
     </div>
 
     

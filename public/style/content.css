@@ -29,3 +29,26 @@
   display:flex;
   gap: 8px;
 }
+
+/** style the result table */
+#hacc-root .result-table {
+  /* Allows horizontal scrolling if content exceeds container width */
+  overflow-x: auto;
+
+  overflow-y:scroll;
+  max-height:480px;
+}
+#hacc-root .result-table table {
+  width: auto; 
+  table-layout: auto;
+  white-space: nowrap;
+  border-collapse: collapse;
+}
+
+#hacc-root .result-table table thead th { 
+  position: sticky;
+  top:0;
+  background-color: #f5f5f5;
+  z-index: 1;
+  border: 1px solid #ddd;
+}

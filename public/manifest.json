@@ -17,8 +17,8 @@
       {
           "matches": ["https://opendata.hawaii.gov/*"],
           "js": ["js/vendor.js", "js/content_script.js"],
-          "css" : ["style/content.css"],
-          "world" : "MAIN"
+          "css" : ["style/content.css"]
+          
       }
   ],
 
