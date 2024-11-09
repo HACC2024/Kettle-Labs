@@ -1,70 +1,60 @@
-# Chrome Extension TypeScript Starter
+# Hawaii OpenData HACC
 
-![build](https://github.com/chibat/chrome-extension-typescript-starter/workflows/build/badge.svg)
-
-Chrome Extension, TypeScript and Visual Studio Code
+Chrome extension to augment `opendata.hawaii.gov`
 
 ## Prerequisites
 
 * [node + npm](https://nodejs.org/) (Current Version)
-
-## Option
-
 * [Visual Studio Code](https://code.visualstudio.com/)
+* [Chrome Web Browser](https://www.google.com/chrome/)
 
-## Includes the following
 
-* TypeScript
-* Webpack
-* React
-* Jest
-* Example Code
-    * Chrome Storage
-    * Options Version 2
-    * content script
-    * count up badge number
-    * background
 
 ## Project Structure
 
-* src/typescript: TypeScript source files
-* src/assets: static files
-* dist: Chrome Extension directory
-* dist/js: Generated JavaScript files
+* src/*: TypeScript source files
+* public/*: static files
+* dist: Chrome Extension build directory
 
 ## Setup
 
-```
+```shell
 npm install
-```
 
-## Import as Visual Studio Code project
-
-...
-
-## Build
-
-```
+# compile production build
 npm run build
-```
 
-## Build in watch mode
-
-### terminal
-
-```
+# watch changes for local development
 npm run watch
 ```
 
-### Visual Studio Code
+## Sample Queries
+Try these queries out against the [unpaid-expenditures-for-hawaii-state-and-county-candidates](https://opendata.hawaii.gov/dataset/unpaid-expenditures-for-hawaii-state-and-county-candidates/resource/caf4dc69-cf11-43dc-b4f9-3c29156d7630) dataset:
 
-Run watch mode.
+#### top campaign spenders
+```sql
+with total_spend as (
+  SELECT
+    "Candidate Name" as name,
+    sum("Unpaid Expenditure Amount"::MONEY) as spend 
+  from "caf4dc69-cf11-43dc-b4f9-3c29156d7630" 
+  group by 1 
+)
+SELECT
+  row_number() over (order by spend desc nulls last) AS rank,
+  name,
+  spend 
+from total_spend 
+order by spend desc nulls last
+limit 10
+```
 
-type `Ctrl + Shift + B`
-
-## Load extension to chrome
-
-Load `dist` directory
-
-## Test
-`npx jest` or `npm run test`
+#### observe spend over time grouped by month
+```sql
+SELECT
+  date_trunc('month', "Date")::DATE as month,
+  sum("Unpaid Expenditure Amount"::MONEY) as spend
+FROM "caf4dc69-cf11-43dc-b4f9-3c29156d7630"
+GROUP BY month
+order by month asc
+```
