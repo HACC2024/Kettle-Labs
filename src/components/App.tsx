@@ -59,7 +59,7 @@ export const App = (props:AppProps) => {
         setResult(err as any);
         setSuccess(false);
       })
-      .finally(() => {setLoading(false));
+      .finally(() => {setLoading(false) });
   }
 
   function saveQuery() {
