@@ -1,16 +1,19 @@
 {
   "manifest_version": 3,
 
-  "name": "Hawaii OpenData",
-  "description": "HACC 2024",
-  "version": "0.1.0",
+  "name": "Hawaii OpenData HACC",
+  "description": "Write SQL queries in Hawai'i's OpenData Portal",
+  "version": "0.1.1",
 
   "options_ui": {
     "page": "options.html"
   },
 
-  "action": {
-    "default_icon": "icon.png"
+  "icons" : {
+    "32": "images/icon-32.png",
+    "64": "images/icon-64.png",
+    "128": "images/icon-128.png",
+    "256": "images/icon-256.png"
   },
 
   "content_scripts": [
@@ -18,7 +21,6 @@
           "matches": ["https://opendata.hawaii.gov/*"],
           "js": ["js/vendor.js", "js/content_script.js"],
           "css" : ["style/content.css"]
-          
       }
   ],
 

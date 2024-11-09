@@ -5,6 +5,7 @@ import { SQLResult } from "../types/api";
 
 type AppProps = {
   resourceId: string;
+  track? : (event: string, data: any) => void;
 }
 
 function minifySQL(sql: string): string {
@@ -46,6 +47,7 @@ export const App = (props:AppProps) => {
 
   function runQuery() {
     setLoading(true);
+    props.track && props.track('run_query', { resourceId : props.resourceId, query } );
     fetch(`/api/3/action/datastore_search_sql?sql=${encodeURIComponent(minifySQL(query))}`)
       .then(async response => {
         const data = await response.json();
@@ -57,7 +59,7 @@ export const App = (props:AppProps) => {
         setResult(err as any);
         setSuccess(false);
       })
-      .finally(() => setLoading(false));
+      .finally(() => {setLoading(false));
   }
 
   function saveQuery() {
@@ -90,7 +92,6 @@ export const App = (props:AppProps) => {
         </div>
       <div className="grid-item">
         <CodeEditor
-            className="grid-item"
             value={result ? JSON.stringify(result, null, 2) : ''}
             language="json"
             placeholder="Results will be shown here..."
