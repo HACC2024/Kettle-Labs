@@ -1,6 +1,7 @@
-# Hawaii OpenData HACC
+# ![opendata-crx](public/images/icon-32.png "opendata.hawaii.gov") Hawaii OpenData HACC
 ![build](https://github.com/HACC2024/Kettle-Labs/workflows/build/badge.svg)
-Chrome extension to augment `opendata.hawaii.gov`
+
+A chrome extension to unlock the full query capability of SQL on Hawaii's OpenData Portal `https://opendata.hawaii.gov/`.
 
 ## Prerequisites
 
@@ -12,11 +13,11 @@ Chrome extension to augment `opendata.hawaii.gov`
 
 ## Project Structure
 
-* src/*: TypeScript source files
-* public/*: static files
-* dist: Chrome Extension build directory
+* `src/*`: TypeScript source files
+* `public/*`: static files
+* `dist`: Chrome Extension build directory
 
-## Setup
+## Setup Build
 
 ```shell
 npm install
@@ -27,6 +28,15 @@ npm run build
 # watch changes for local development
 npm run watch
 ```
+
+## Installation
+![developer mode](public/load_unpacked.png "chrome://extensions")
+To load an unpacked extension in developer mode:
+1. Go to the Extensions page by entering `chrome://extensions` in a new tab. (By design `chrome://` URLs are not linkable.)
+   * Alternatively, click the Extensions menu puzzle button and select **Manage Extensions** at the bottom of the menu.
+   * Or, click the Chrome menu, hover over **More Tools**, then select **Extensions**.
+2. Enable Developer Mode by clicking the toggle switch next to **Developer mode**.
+3. Click the Load unpacked button and select the `/dist`.
 
 ## Sample Queries
 Try these queries out against the [unpaid-expenditures-for-hawaii-state-and-county-candidates](https://opendata.hawaii.gov/dataset/unpaid-expenditures-for-hawaii-state-and-county-candidates/resource/caf4dc69-cf11-43dc-b4f9-3c29156d7630) dataset:
