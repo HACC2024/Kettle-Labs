@@ -1,0 +1,30 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ListBucketAccess",
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::hacc24"
+    },
+    {
+      "Sid": "GetObjectAccess",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObjectVersionTorrent",
+        "s3:GetObjectAcl",
+        "s3:GetObject",
+        "s3:GetObjectTorrent",
+        "s3:GetObjectRetention",
+        "s3:GetObjectVersionTagging",
+        "s3:GetObjectVersionAcl",
+        "s3:GetObjectTagging",
+        "s3:GetObjectVersionForReplication",
+        "s3:GetObjectLegalHold",
+        "s3:GetObjectVersionAttributes",
+        "s3:GetObjectVersion"
+      ],
+      "Resource": "arn:aws:s3:::hacc24/hiopendata/*"
+    }
+  ]
+}
