@@ -3,7 +3,7 @@
 
   "name": "Hawaii OpenData HACC",
   "description": "Write SQL queries in Hawai'i's OpenData Portal",
-  "version": "0.1.4",
+  "version": "0.1.5",
 
   "options_ui": {
     "page": "options.html"
@@ -36,9 +36,7 @@
 
 
   "permissions": [
-    "storage",
-    "webRequest",
-    "webNavigation"
+    "storage"
   ],
 
   "host_permissions": [
