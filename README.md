@@ -3,6 +3,8 @@
 
 A chrome extension to unlock the full query capability of SQL on Hawaii's OpenData Portal `https://opendata.hawaii.gov/`.
 
+### <img src="https://fonts.gstatic.com/s/i/productlogos/chrome_store/v7/192px.svg" width="32" height="32"> Now approved in the Chrome Web Store! [[install link](https://chromewebstore.google.com/detail/hawaii-opendata-hacc/cohalgekdkpklkgcchejaflbdoggbmmo)]
+
 ## Prerequisites
 
 * [node + npm](https://nodejs.org/) (Current Version)
@@ -30,7 +32,9 @@ npm run watch
 ```
 
 ## Installation
-![developer mode](public/load_unpacked.png "chrome://extensions")
+
+<img src="public/load_unpacked.png" width="483">
+
 To load an unpacked extension in developer mode:
 1. Go to the Extensions page by entering `chrome://extensions` in a new tab. (By design `chrome://` URLs are not linkable.)
    * Alternatively, click the Extensions menu puzzle button and select **Manage Extensions** at the bottom of the menu.
